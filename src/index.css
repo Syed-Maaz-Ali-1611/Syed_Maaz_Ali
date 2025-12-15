@@ -1,37 +1,74 @@
 @import "tailwindcss";
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-  }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-  }
+/* Add this line for class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+/* Custom base styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-  body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300;
-    font-feature-settings: "rlig" 1, "calt" 1;
+/* Light theme (default) */
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #06b6d4;
+}
+
+/* Apply base styles */
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  
+  --animate-fade-in: fadeIn 0.5s ease-in;
+  --animate-fade-in-down: fadeInDown 0.5s ease-out;
+  --animate-fade-out-up: fadeOutUp 0.5s ease-out;
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@layer components {
-  .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-12 lg:py-20;
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
   }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
 
-  .container-custom {
-    @apply max-w-7xl mx-auto;
-  }
+/* Base element styles */
+body {
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
-  }
+/* Dark mode styles */
+:root.dark {
+  color-scheme: dark;
+}
 
-  .card-hover {
-    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl;
-  }
+:root.dark body {
+  background-color: #0f172a;
+  color: #cbd5e1;
 }
 
 /* Smooth scrolling */
@@ -45,13 +82,58 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  background: #f1f1f1;
+}
+
+:root.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  background: #6366f1;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-500;
+  background: #4f46e5;
+}
+
+:root.dark ::-webkit-scrollbar-thumb {
+  background: #06b6d4;
+}
+
+:root.dark ::-webkit-scrollbar-thumb:hover {
+  background: #0891b2;
+}
+
+/* Selection color */
+::selection {
+  background-color: #6366f1;
+  color: white;
+}
+
+:root.dark ::selection {
+  background-color: #06b6d4;
+}
+
+/* Custom utility classes */
+.glass-effect {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
 }
