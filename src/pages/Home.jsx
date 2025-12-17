@@ -29,7 +29,7 @@ const Home = () => {
             <span className="block text-gray-800 dark:text-white">
               Hi, I'm{' '}
               <span className="bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-cyan-400 dark:to-purple-400 bg-clip-text text-transparent animate-gradient">
-                [Your Name]
+              Syed Maaz Ali
               </span>
             </span>
           </h1>
@@ -37,16 +37,16 @@ const Home = () => {
           
           <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-700 dark:text-gray-300">
             <span className="typewriter">
-              Full Stack Developer & UI/UX Designer
+              Software Engineer
             </span>
           </h2>
         </div>
 
         {/* Description */}
-        <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-300">
-          Crafting beautiful, functional web experiences with modern technologies.
-          Passionate about clean code, intuitive design, and scalable solutions.
-        </p>
+      <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-300">
+  Software Engineer skilled in MERN stack, Next.js, and React Native. 
+  Building scalable applications with modern technologies.
+</p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in-up delay-500">

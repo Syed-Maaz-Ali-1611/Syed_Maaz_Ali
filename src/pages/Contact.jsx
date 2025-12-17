@@ -1,32 +1,126 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle, Linkedin, Github, Twitter, Sparkles, MessageSquare } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    fname: '',
+    femail: '',
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  // Initialize EmailJS
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init({
+        publicKey: publicKey,
+        blockHeadless: true,
+      });
+    }
+  }, []);
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setSubmitError('');
+  
+  try {
+    console.log('🚀 Attempting to send email...');
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    }, 1500);
-  };
-
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    
+    // Get current date
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    
+    // CRITICAL: Your template uses {{title}} in Subject, so you MUST include it
+    const templateData = {
+      fname: formData.name || 'No name provided',
+      femail: formData.email || 'No email provided',
+      message: formData.message || 'No message provided',
+      date: currentDate,
+      title: `Message from ${formData.name || 'Visitor'}`, // REQUIRED for template
+      to_email: 'maazall1611@gmail.com' // Ensure correct email
+    };
+    
+    console.log('📤 Sending this data:', templateData);
+    
+    // Method 1: Direct API call (most reliable)
+    const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        service_id: serviceId,
+        template_id: templateId,
+        user_id: publicKey,
+        template_params: templateData
+      })
+    });
+    
+    console.log('📨 Response Status:', response.status);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ EmailJS Error Response:', errorText);
+      throw new Error(`EmailJS Error ${response.status}: ${errorText}`);
+    }
+    
+    const result = await response.text();
+    console.log('✅ Email sent successfully:', result);
+    
+    setIsLoading(false);
+    setIsSubmitted(true);
+    setFormData({ name: '', email: '', message: '' });
+    
+    setTimeout(() => setIsSubmitted(false), 5000);
+    
+  } catch (error) {
+    console.error('❌ Email sending failed:', error);
+    setIsLoading(false);
+    
+    let errorMessage = '';
+    
+    if (error.message.includes('400')) {
+      errorMessage = `
+        🚨 **400 Bad Request - Missing Required Parameter**
+        
+        **Problem:** Your EmailJS template requires a "title" parameter that you're not sending.
+        
+        **Template Has:** Subject: "Contact Us: {{title}}"
+        **Your Code Must Send:** title: "Some value"
+        
+        **Already Fixed in the code above:**
+        ✓ Added "title" parameter with value: "Message from [name]"
+        ✓ All template variables now provided: fname, femail, message, date, title
+        
+        **Still getting error? Try these:**
+        1. Refresh browser and test again
+        2. Check browser Console for detailed logs
+        3. Test with this quick diagnostic below ⬇️
+      `;
+    } else {
+      errorMessage = `Error: ${error.message}`;
+    }
+    
+    setSubmitError(errorMessage);
+    setTimeout(() => setSubmitError(''), 10000);
+  }
+};
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -38,8 +132,8 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email',
-      value: 'your.email@example.com',
-      link: 'mailto:your.email@example.com',
+      value: 'maazall1611@gmail.com',
+      link: 'mailto:maazall1611@gmail.com',
       color: 'from-blue-500 to-cyan-500'
     },
     {
@@ -66,13 +160,12 @@ const Contact = () => {
 
   return (
     <section id="contact" className="relative min-h-screen py-20 px-4 overflow-hidden bg-gradient-to-br from-white via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Animated background elements */}
+      {/* Animated background elements - KEEP YOUR EXISTING CODE */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-indigo-300 dark:bg-indigo-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse"></div>
         <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-purple-300 dark:bg-purple-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse delay-1500"></div>
         <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-blue-300 dark:bg-blue-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse delay-3000"></div>
         
-        {/* Floating elements */}
         <div className="absolute top-10 left-20 w-10 h-10 border-2 border-indigo-400 dark:border-cyan-700 rounded-full opacity-20 animate-float"></div>
         <div className="absolute bottom-20 right-20 w-14 h-14 border-2 border-purple-400 dark:border-purple-700 rotate-45 opacity-20 animate-float delay-1000"></div>
         <div className="absolute top-40 right-10 w-8 h-8 border-2 border-blue-400 dark:border-blue-700 rounded-full opacity-20 animate-float delay-2000"></div>
@@ -207,15 +300,21 @@ const Contact = () => {
                   Send me a message
                 </h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                {submitError && (
+                  <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-xl animate-fade-in-up">
+                    <p className="text-red-700 dark:text-red-300 font-medium">{submitError}</p>
+                  </div>
+                )}
+                
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="animate-fade-in-up" style={{ animationDelay: '700ms' }}>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Your Name
+                      Your Name *
                     </label>
                     <input
                       type="text"
                       id="name"
-                      name="name"
+                      name="fname"
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -226,12 +325,12 @@ const Contact = () => {
 
                   <div className="animate-fade-in-up" style={{ animationDelay: '800ms' }}>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email Address
+                      Email Address *
                     </label>
                     <input
                       type="email"
                       id="email"
-                      name="email"
+                      name="femail"
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -242,7 +341,7 @@ const Contact = () => {
 
                   <div className="animate-fade-in-up" style={{ animationDelay: '900ms' }}>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Your Message
+                      Your Message *
                     </label>
                     <textarea
                       id="message"
@@ -255,6 +354,9 @@ const Contact = () => {
                       placeholder="Tell me about your project..."
                     />
                   </div>
+
+                  {/* Hidden fields for EmailJS template */}
+                  <input type="hidden" name="date" />
 
                   <div className="animate-fade-in-up" style={{ animationDelay: '1000ms' }}>
                     <button
@@ -284,7 +386,7 @@ const Contact = () => {
                 {/* Privacy Note */}
                 <div className="mt-8 p-4 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl animate-fade-in-up" style={{ animationDelay: '1100ms' }}>
                   <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                    <span className="font-semibold text-indigo-600 dark:text-cyan-400">🔒 Secure</span> - Your information is protected and will only be used to respond to your inquiry.
+                    <span className="font-semibold text-indigo-600 dark:text-cyan-400">🔒 Secure</span> - Powered by EmailJS. Your information is protected and will only be used to respond to your inquiry.
                   </p>
                 </div>
               </>
@@ -408,4 +510,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Contact; 

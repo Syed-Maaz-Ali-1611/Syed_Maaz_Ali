@@ -1,49 +1,63 @@
 import React from 'react';
-import { Briefcase, Calendar, MapPin, Award, TrendingUp, Building, Sparkles } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, Award, TrendingUp, Building, Sparkles, Database, Smartphone, Globe } from 'lucide-react';
 
 const Experience = () => {
   const experiences = [
     {
-      year: '2022 - Present',
-      position: 'Senior Full Stack Developer',
-      company: 'Tech Innovators Inc.',
-      location: 'San Francisco, CA',
+      year: 'July 2025 – Nov 2025',
+      position: 'Full-Stack Developer',
+      company: 'Sasquatch Innovations',
+      location: 'Toronto, Canada',
       type: 'Full-time',
       achievements: [
-        'Led development of a microservices-based SaaS platform serving 50k+ users',
-        'Improved application performance by 60% through code optimization',
-        'Mentored 5 junior developers and established coding standards',
-        'Implemented CI/CD pipeline reducing deployment time by 70%'
+        'Developed full-stack web applications using MERN stack and Next.js with TypeScript',
+        'Built responsive admin panels and reusable components for better user experience',
+        'Implemented secure Node.js/PostgreSQL backend with proper authentication',
+        'Integrated Firebase Storage and Stripe payment gateway for seamless operations'
       ],
-      technologies: ['React', 'Node.js', 'AWS', 'Docker', 'GraphQL']
+      technologies: ['MERN Stack', 'Next.js', 'TypeScript', 'PostgreSQL', 'Firebase', 'Stripe']
     },
     {
-      year: '2020 - 2022',
-      position: 'Frontend Developer',
-      company: 'Digital Solutions Ltd.',
-      location: 'New York, NY',
+      year: 'March 2025 – July 2025',
+      position: 'Software Developer',
+      company: 'ZERO Vertical',
+      location: 'Karachi, Pakistan',
       type: 'Full-time',
       achievements: [
-        'Built responsive web applications using React and TypeScript',
-        'Collaborated with UX team to implement design systems',
-        'Reduced bundle size by 40% through code splitting',
-        'Implemented unit testing achieving 90% coverage'
+        'Developed full-stack MERN and Next.js applications with SSR/SSG for SEO-friendly solutions',
+        'Built RESTful APIs with Node.js/Express and Java Spring Boot',
+        'Developed cross-platform React Native apps using Firebase for real-time data',
+        'Implemented authentication systems and optimized application performance'
       ],
-      technologies: ['React', 'TypeScript', 'Redux', 'Jest', 'Sass']
+      technologies: ['MERN Stack', 'Next.js', 'React Native', 'Java Spring Boot', 'Firebase', 'SSR/SSG']
     },
     {
-      year: '2019 - 2020',
-      position: 'Software Engineer Intern',
-      company: 'StartUp Ventures',
-      location: 'Boston, MA',
+      year: 'Nov 2023 – March 2025',
+      position: 'Backend Developer',
+      company: 'Abidi Solutions',
+      location: 'Maryland, USA',
+      type: 'Full-time',
+      achievements: [
+        'Developed full-stack MERN web applications and cross-platform React Native apps',
+        'Built backend APIs with Node.js/Express and Firebase for real-time functionality',
+        'Implemented smooth frontend-database integration and data management systems',
+        'Collaborated with teams to deliver scalable, high-quality solutions'
+      ],
+      technologies: ['MERN Stack', 'React Native', 'Node.js/Express', 'Firebase', 'REST APIs', 'Azure']
+    },
+    {
+      year: 'Oct 2023 – Nov 2023',
+      position: 'Website Developer Intern',
+      company: 'Super Nova',
+      location: 'Karachi, Pakistan',
       type: 'Internship',
       achievements: [
-        'Developed features for a React-based dashboard',
-        'Assisted in API development using Node.js',
-        'Participated in agile development processes',
-        'Contributed to team code reviews and documentation'
+        'Contributed to frontend development with .NET C# and React Native',
+        'Improved UI/UX design for responsive, cross-platform mobile applications',
+        'Assisted in debugging and optimizing apps for better performance and stability',
+        'Participated in code reviews and learned industry best practices'
       ],
-      technologies: ['JavaScript', 'React', 'Node.js', 'MongoDB']
+      technologies: ['.NET C#', 'React Native']
     }
   ];
 
@@ -75,7 +89,8 @@ const Experience = () => {
           </h2>
           <div className="h-1 w-32 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-8 rounded-full animate-slide-in"></div>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto animate-fade-in-up delay-300">
-            A timeline of my professional growth and contributions to various organizations
+            A timeline of my professional growth in software development, from internships 
+            to full-stack roles, focusing on MERN stack, Next.js, and React Native applications.
           </p>
         </div>
 
@@ -96,13 +111,17 @@ const Experience = () => {
                 index % 2 === 0 
                   ? 'left-0 md:left-1/2 md:-translate-x-1/2' 
                   : 'left-0 md:left-1/2 md:-translate-x-1/2'
-              } top-6 w-5 h-5 rounded-full bg-indigo-600 dark:bg-cyan-400 border-4 border-white dark:border-gray-900 z-10 animate-pulse-glow`}></div>
+              } top-6 w-5 h-5 rounded-full ${
+                exp.type === 'Internship' ? 'bg-green-600 dark:bg-green-400' :
+                exp.type === 'Contract' ? 'bg-orange-600 dark:bg-orange-400' :
+                'bg-indigo-600 dark:bg-cyan-400'
+              } border-4 border-white dark:border-gray-900 z-10 animate-pulse-glow`}></div>
               
               {/* Year badge */}
               <div className={`mb-4 ${
                 index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
               }`}>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-cyan-900 dark:to-blue-900 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: `${index * 200}ms` }}>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-cyan-900 dark:to-blue-900 backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: `${index * 150}ms` }}>
                   <Calendar className="w-4 h-4 text-indigo-600 dark:text-cyan-400" />
                   <span className="text-sm font-semibold text-indigo-700 dark:text-cyan-300">
                     {exp.year}
@@ -113,7 +132,7 @@ const Experience = () => {
               {/* Experience Card */}
               <div className={`group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in-up ${
                 index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
-              }`} style={{ animationDelay: `${index * 200 + 100}ms` }}>
+              }`} style={{ animationDelay: `${index * 150 + 100}ms` }}>
                 <div className={`flex flex-col ${
                   index % 2 === 0 ? 'md:items-end' : ''
                 }`}>
@@ -135,7 +154,13 @@ const Experience = () => {
                           {exp.location}
                         </span>
                       </div>
-                      <span className="px-3 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-700 dark:to-gray-800 rounded-full text-sm text-gray-700 dark:text-gray-300 backdrop-blur-sm">
+                      <span className={`px-3 py-1 rounded-full text-sm backdrop-blur-sm ${
+                        exp.type === 'Internship' 
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' 
+                          : exp.type === 'Contract'
+                          ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300'
+                          : 'bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-700 dark:to-gray-800 text-gray-700 dark:text-gray-300'
+                      }`}>
                         {exp.type}
                       </span>
                     </div>
@@ -145,7 +170,7 @@ const Experience = () => {
                   <div className="mb-8">
                     <h4 className="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 flex items-center gap-2">
                       <Award className="w-5 h-5 text-yellow-500 animate-pulse" />
-                      Key Achievements
+                      Key Responsibilities & Achievements
                     </h4>
                     <ul className={`space-y-3 ${
                       index % 2 === 0 ? 'md:text-right' : ''
@@ -191,20 +216,44 @@ const Experience = () => {
         {/* Stats */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { value: '3+', label: 'Years Experience', desc: 'Professional Development', icon: '📈' },
-            { value: '15+', label: 'Projects Delivered', desc: 'Successfully Completed', icon: '🚀' },
-            { value: '10k+', label: 'Lines of Code', desc: 'Contributed Monthly', icon: '💻' },
-            { value: '100%', label: 'Client Satisfaction', desc: 'Across All Projects', icon: '⭐' },
+            { 
+              value: '4', 
+              label: 'Companies', 
+              desc: 'Professional Experience', 
+              icon: <Building className="w-8 h-8 mx-auto" />,
+              color: 'text-blue-600 dark:text-blue-400'
+            },
+            { 
+              value: '2+', 
+              label: 'Years Experience', 
+              desc: 'Software Development', 
+              icon: <Calendar className="w-8 h-8 mx-auto" />,
+              color: 'text-purple-600 dark:text-purple-400'
+            },
+            { 
+              value: '10+', 
+              label: 'Projects Delivered', 
+              desc: 'Across All Roles', 
+              icon: <Database className="w-8 h-8 mx-auto" />,
+              color: 'text-green-600 dark:text-green-400'
+            },
+            { 
+              value: 'Full-Stack', 
+              label: 'Specialization', 
+              desc: 'MERN & React Native', 
+              icon: <Globe className="w-8 h-8 mx-auto" />,
+              color: 'text-pink-600 dark:text-pink-400'
+            },
           ].map((stat, index) => (
             <div
               key={index}
               className="group text-center p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-indigo-500 dark:hover:border-cyan-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl animate-fade-in-up"
               style={{ animationDelay: `${index * 200 + 800}ms` }}
             >
-              <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className={`mb-2 group-hover:scale-110 transition-transform duration-300 ${stat.color}`}>
                 {stat.icon}
               </div>
-              <div className="text-4xl font-bold text-indigo-600 dark:text-cyan-400 mb-2 group-hover:scale-110 transition-transform">
+              <div className={`text-4xl font-bold mb-2 group-hover:scale-110 transition-transform ${stat.color}`}>
                 {stat.value}
               </div>
               <div className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
@@ -215,6 +264,53 @@ const Experience = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Experience Summary */}
+        <div className="mt-12 p-8 bg-gradient-to-r from-indigo-50/80 to-purple-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm rounded-2xl border border-indigo-100/50 dark:border-gray-700/50">
+          <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-white text-center flex items-center justify-center gap-2">
+            <Sparkles className="w-5 h-5 text-yellow-500" />
+            Experience Highlights
+            <Sparkles className="w-5 h-5 text-yellow-500" />
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                  <Smartphone className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                </div>
+                <span className="text-gray-700 dark:text-gray-300">
+                  Cross-platform React Native development
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
+                  <Database className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                </div>
+                <span className="text-gray-700 dark:text-gray-300">
+                  Full-stack MERN applications with secure backends
+                </span>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                  <Globe className="w-4 h-4 text-green-600 dark:text-green-400" />
+                </div>
+                <span className="text-gray-700 dark:text-gray-300">
+                  Next.js with SSR/SSG for SEO optimization
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center">
+                  <TrendingUp className="w-4 h-4 text-pink-600 dark:text-pink-400" />
+                </div>
+                <span className="text-gray-700 dark:text-gray-300">
+                  Payment gateway integration (Stripe) and real-time features
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Decorative elements */}

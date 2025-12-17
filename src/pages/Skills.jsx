@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Code, Palette, Database, Server, Cloud, Smartphone, Zap, Users } from 'lucide-react';
+import { Code, Palette, Database, Server, Cloud, Smartphone, Zap, Users, Cpu, GitBranch } from 'lucide-react';
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState('frontend');
@@ -9,48 +9,48 @@ const Skills = () => {
       icon: <Palette className="w-8 h-8" />,
       color: 'from-blue-500 to-cyan-500',
       skills: [
-        { name: 'React.js', level: 95, icon: '⚛️' },
-        { name: 'Next.js', level: 90, icon: '▲' },
-        { name: 'TypeScript', level: 85, icon: 'TS' },
-        { name: 'Tailwind CSS', level: 95, icon: '🎨' },
-        { name: 'Redux', level: 88, icon: '🔄' },
-        { name: 'GraphQL', level: 80, icon: '🔷' },
+        { name: 'HTML/CSS', level: 95, icon: '🌐' },
+        { name: 'JavaScript', level: 92, icon: 'JS' },
+        { name: 'React.js', level: 90, icon: '⚛️' },
+        { name: 'Next.js', level: 85, icon: '▲' },
+        { name: 'TypeScript', level: 80, icon: 'TS' },
+        { name: 'React Native', level: 85, icon: '📱' },
       ]
     },
     backend: {
       icon: <Server className="w-8 h-8" />,
       color: 'from-purple-500 to-pink-500',
       skills: [
-        { name: 'Node.js', level: 92, icon: '🟢' },
-        { name: 'Express.js', level: 90, icon: '🚂' },
-        { name: 'Python/Django', level: 85, icon: '🐍' },
-        { name: 'REST APIs', level: 95, icon: '🔗' },
-        { name: 'Microservices', level: 82, icon: '🧩' },
-        { name: 'Authentication', level: 90, icon: '🔐' },
+        { name: 'Node.js', level: 88, icon: '🟢' },
+        { name: 'Express.js', level: 85, icon: '🚂' },
+        { name: 'Python', level: 80, icon: '🐍' },
+        { name: 'REST APIs', level: 90, icon: '🔗' },
+        { name: 'OOP', level: 85, icon: '🧩' },
+        { name: 'DSA', level: 80, icon: '🧠' },
       ]
     },
     database: {
       icon: <Database className="w-8 h-8" />,
       color: 'from-green-500 to-emerald-500',
       skills: [
-        { name: 'MongoDB', level: 88, icon: '🍃' },
-        { name: 'PostgreSQL', level: 85, icon: '🐘' },
-        { name: 'Redis', level: 80, icon: '🔴' },
+        { name: 'MongoDB', level: 85, icon: '🍃' },
+        { name: 'PostgreSQL', level: 80, icon: '🐘' },
         { name: 'Firebase', level: 85, icon: '🔥' },
-        { name: 'Prisma', level: 82, icon: '⚡' },
-        { name: 'Elasticsearch', level: 75, icon: '🔍' },
+        { name: 'MERN Stack', level: 90, icon: '⚡' },
+        { name: 'Database Design', level: 82, icon: '🗄️' },
+        { name: 'Data Modeling', level: 78, icon: '📊' },
       ]
     },
-    devops: {
-      icon: <Cloud className="w-8 h-8" />,
+    tools: {
+      icon: <Cpu className="w-8 h-8" />,
       color: 'from-orange-500 to-red-500',
       skills: [
-        { name: 'Docker', level: 85, icon: '🐳' },
-        { name: 'AWS', level: 82, icon: '☁️' },
-        { name: 'CI/CD', level: 88, icon: '🔄' },
-        { name: 'Kubernetes', level: 75, icon: '⚓' },
-        { name: 'Linux', level: 85, icon: '🐧' },
-        { name: 'Nginx', level: 80, icon: '🎩' },
+        { name: 'Git/GitHub', level: 90, icon: '🐙' },
+        { name: 'Docker', level: 75, icon: '🐳' },
+        { name: 'AWS Basics', level: 70, icon: '☁️' },
+        { name: 'CI/CD', level: 75, icon: '🔄' },
+        { name: 'Agile/Scrum', level: 85, icon: '🏃' },
+        { name: 'Testing', level: 80, icon: '🧪' },
       ]
     }
   };
@@ -59,7 +59,7 @@ const Skills = () => {
     { id: 'frontend', label: 'Frontend', icon: <Palette className="w-5 h-5" /> },
     { id: 'backend', label: 'Backend', icon: <Server className="w-5 h-5" /> },
     { id: 'database', label: 'Database', icon: <Database className="w-5 h-5" /> },
-    { id: 'devops', label: 'DevOps', icon: <Cloud className="w-5 h-5" /> },
+    { id: 'tools', label: 'Tools & Methods', icon: <Cpu className="w-5 h-5" /> },
   ];
 
   return (
@@ -90,8 +90,9 @@ const Skills = () => {
           </h2>
           <div className="h-1 w-32 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-8 rounded-full animate-slide-in"></div>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto animate-fade-in-up delay-300">
-            Mastery of modern technologies and frameworks to build scalable, 
-            performant applications
+            Proficient in modern web technologies with expertise in MERN stack, Next.js, 
+            React Native, and full-stack development. Focused on building scalable, 
+            efficient applications.
           </p>
         </div>
 
@@ -143,23 +144,42 @@ const Skills = () => {
               </div>
               
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                Advanced proficiency with {skill.level}% mastery
+                {skill.level >= 90 ? 'Expert proficiency' : 
+                 skill.level >= 80 ? 'Advanced proficiency' : 
+                 skill.level >= 70 ? 'Intermediate proficiency' : 
+                 'Working knowledge'} with {skill.level}% mastery
               </div>
             </div>
           ))}
         </div>
 
-        {/* Additional Skills */}
+        {/* Additional Competencies */}
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 animate-fade-in-up delay-500">
           <h3 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white text-center">
-            Additional Competencies
+            Core Competencies
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { icon: <Smartphone className="w-6 h-6" />, label: 'Mobile Development' },
-              { icon: <Users className="w-6 h-6" />, label: 'Team Leadership' },
-              { icon: <Code className="w-6 h-6" />, label: 'Clean Architecture' },
-              { icon: <Zap className="w-6 h-6" />, label: 'Performance Optimization' },
+              { 
+                icon: <Smartphone className="w-6 h-6" />, 
+                label: 'Mobile Development', 
+                desc: 'React Native, Cross-platform'
+              },
+              { 
+                icon: <Users className="w-6 h-6" />, 
+                label: 'Team Management', 
+                desc: 'Leadership & Collaboration'
+              },
+              { 
+                icon: <Code className="w-6 h-6" />, 
+                label: 'Problem Solving', 
+                desc: 'DSA & Algorithm Design'
+              },
+              { 
+                icon: <GitBranch className="w-6 h-6" />, 
+                label: 'Version Control', 
+                desc: 'Git, GitHub, CI/CD'
+              },
             ].map((item, index) => (
               <div
                 key={index}
@@ -168,10 +188,34 @@ const Skills = () => {
                 <div className="inline-flex p-3 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-900 dark:to-cyan-900 text-blue-600 dark:text-cyan-400 mb-4 group-hover:scale-110 transition-transform animate-pulse-glow">
                   {item.icon}
                 </div>
-                <h4 className="font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors">
+                <h4 className="font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors mb-2">
                   {item.label}
                 </h4>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  {item.desc}
+                </p>
               </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Skills Summary */}
+        <div className="mt-12 p-8 bg-gradient-to-r from-blue-50/80 to-cyan-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm rounded-2xl border border-blue-100/50 dark:border-gray-700/50">
+          <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-white text-center">
+            Full Stack Proficiency
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              'MERN Stack', 'Next.js', 'TypeScript', 'React Native', 
+              'Node.js', 'Express.js', 'MongoDB', 'PostgreSQL', 
+              'Firebase', 'Python', 'REST APIs', 'OOP', 'DSA'
+            ].map((skill, index) => (
+              <span
+                key={index}
+                className="px-4 py-2 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 dark:hover:from-cyan-900 dark:hover:to-blue-900 hover:scale-105 transition-all duration-300"
+              >
+                {skill}
+              </span>
             ))}
           </div>
         </div>

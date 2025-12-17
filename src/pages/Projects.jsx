@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Github, ExternalLink, Star, Users, Zap, Eye, Sparkles } from 'lucide-react';
+import { Github, ExternalLink, Star, Users, Zap, Eye, Sparkles, Smartphone, GraduationCap, Brain, Database, MessageSquare, Cpu } from 'lucide-react';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
@@ -7,95 +7,101 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
+      title: 'Smart Parking System',
       category: 'fullstack',
-      description: 'A full-featured e-commerce platform with real-time inventory, payment processing, and admin dashboard.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Redis'],
-      github: '#',
+      description: 'Final Year Project - A comprehensive smart parking solution with real-time slot detection, mobile reservations, and license plate recognition.',
+      technologies: ['React Native', 'TensorFlow', 'OpenCV', 'Node.js', 'MongoDB', 'Python'],
+      github: 'https://github.com/Syed-Maaz-Ali-1611/Smart-Parking-System',
       live: '#',
-      stars: 142,
+      stars: 45,
       contributors: 3,
       featured: true,
-      image: '🛒',
-      color: 'from-blue-500 to-cyan-500'
+      image: '🚗',
+      color: 'from-blue-500 to-cyan-500',
+      icon: <Smartphone className="w-8 h-8" />
     },
     {
       id: 2,
-      title: 'AI-Powered Analytics Dashboard',
-      category: 'frontend',
-      description: 'Interactive dashboard for data visualization and predictive analytics using machine learning models.',
-      technologies: ['Next.js', 'TypeScript', 'D3.js', 'TensorFlow.js'],
-      github: '#',
+      title: 'School Management System',
+      category: 'fullstack',
+      description: 'Comprehensive platform for schools to manage students, attendance, and communication between teachers and parents.',
+      technologies: ['MERN Stack', 'React.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind'],
+      github: 'https://github.com/Syed-Maaz-Ali-1611/School-Management-System',
       live: '#',
-      stars: 89,
+      stars: 32,
       contributors: 2,
       featured: true,
-      image: '📊',
-      color: 'from-purple-500 to-pink-500'
+      image: '🏫',
+      color: 'from-purple-500 to-pink-500',
+      icon: <GraduationCap className="w-8 h-8" />
     },
     {
       id: 3,
-      title: 'Real-time Chat Application',
+      title: 'Inventory Management System',
       category: 'fullstack',
-      description: 'Scalable chat application with video calling, file sharing, and end-to-end encryption.',
-      technologies: ['React', 'Socket.io', 'WebRTC', 'PostgreSQL'],
-      github: '#',
+      description: 'Business inventory management system for tracking stock levels, orders, and supplier information in real-time.',
+      technologies: ['MERN Stack', 'React.js', 'Node.js', 'MongoDB', 'Express.js'],
+      github: 'https://github.com/Syed-Maaz-Ali-1611/Inventory-Management',
       live: '#',
-      stars: 67,
-      contributors: 4,
+      stars: 28,
+      contributors: 1,
       featured: false,
-      image: '💬',
-      color: 'from-green-500 to-emerald-500'
+      image: '📦',
+      color: 'from-green-500 to-emerald-500',
+      icon: <Database className="w-8 h-8" />
     },
     {
       id: 4,
-      title: 'Task Management System',
-      category: 'frontend',
-      description: 'Collaborative project management tool with drag-drop interface and real-time updates.',
-      technologies: ['React', 'Redux', 'Firebase', 'Tailwind CSS'],
-      github: '#',
+      title: 'Virtual Assistant',
+      category: 'ai',
+      description: 'Python-based AI assistant with NLP capabilities for task automation, scheduling, and conversational interactions.',
+      technologies: ['Python', 'NLP', 'Machine Learning', 'TensorFlow', 'Speech Recognition'],
+      github: 'https://github.com/Syed-Maaz-Ali-1611/Virtual-Assistant',
       live: '#',
-      stars: 54,
-      contributors: 2,
-      featured: false,
-      image: '📋',
-      color: 'from-orange-500 to-red-500'
+      stars: 56,
+      contributors: 1,
+      featured: true,
+      image: '🤖',
+      color: 'from-orange-500 to-red-500',
+      icon: <Brain className="w-8 h-8" />
     },
     {
       id: 5,
-      title: 'API Gateway Microservice',
-      category: 'backend',
-      description: 'High-performance API gateway with rate limiting, authentication, and load balancing.',
-      technologies: ['Node.js', 'Express', 'Redis', 'Docker', 'Nginx'],
-      github: '#',
+      title: 'Sign Language Translator',
+      category: 'iot',
+      description: 'Wearable device that translates sign language gestures into audio using flex sensors and Arduino.',
+      technologies: ['Arduino', 'Python', 'Flex Sensors', 'Bluetooth', 'Text-to-Speech'],
+      github: 'https://github.com/Syed-Maaz-Ali-1611/Sign-Language-Translator',
       live: '#',
-      stars: 98,
+      stars: 67,
       contributors: 3,
       featured: true,
-      image: '🚪',
-      color: 'from-indigo-500 to-purple-500'
+      image: '👐',
+      color: 'from-indigo-500 to-purple-500',
+      icon: <MessageSquare className="w-8 h-8" />
     },
     {
       id: 6,
-      title: 'Portfolio Website Builder',
+      title: 'Fusion HR',
       category: 'fullstack',
-      description: 'Drag-and-drop website builder specifically designed for creating developer portfolios.',
-      technologies: ['Next.js', 'Prisma', 'Tailwind', 'AWS S3'],
-      github: '#',
+      description: 'Comprehensive HR, finance, and project management platform with attendance tracking and document management.',
+      technologies: ['MERN Stack', 'React.js', 'Node.js', 'MongoDB', 'Express.js'],
+      github: 'https://github.com/Syed-Maaz-Ali-1611/Fusion-HR',
       live: '#',
-      stars: 112,
-      contributors: 5,
-      featured: true,
-      image: '🎨',
-      color: 'from-pink-500 to-rose-500'
+      stars: 39,
+      contributors: 2,
+      featured: false,
+      image: '💼',
+      color: 'from-pink-500 to-rose-500',
+      icon: <Cpu className="w-8 h-8" />
     }
   ];
 
   const categories = [
-    { id: 'all', label: 'All Projects', color: 'from-blue-500 to-cyan-500' },
-    { id: 'fullstack', label: 'Full Stack', color: 'from-purple-500 to-pink-500' },
-    { id: 'frontend', label: 'Frontend', color: 'from-green-500 to-emerald-500' },
-    { id: 'backend', label: 'Backend', color: 'from-orange-500 to-red-500' },
+    { id: 'all', label: 'All Projects', color: 'from-blue-500 to-cyan-500', icon: <Eye className="w-4 h-4" /> },
+    { id: 'fullstack', label: 'Full Stack', color: 'from-purple-500 to-pink-500', icon: <Database className="w-4 h-4" /> },
+    { id: 'ai', label: 'AI/ML', color: 'from-orange-500 to-red-500', icon: <Brain className="w-4 h-4" /> },
+    { id: 'iot', label: 'IoT', color: 'from-indigo-500 to-purple-500', icon: <Cpu className="w-4 h-4" /> },
   ];
 
   const filteredProjects = filter === 'all' 
@@ -122,7 +128,7 @@ const Projects = () => {
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 animate-fade-in-down">
             <Eye className="w-5 h-5 text-purple-600 dark:text-cyan-400" />
             <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-              Featured Work
+              Personal Projects
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800 dark:text-white animate-fade-in-up">
@@ -130,7 +136,8 @@ const Projects = () => {
           </h2>
           <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-8 rounded-full animate-slide-in"></div>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto animate-fade-in-up delay-300">
-            A collection of my recent work showcasing problem-solving skills and technical expertise
+            A collection of my personal projects showcasing expertise in full-stack development, 
+            AI/ML, IoT, and innovative problem-solving across various domains.
           </p>
         </div>
 
@@ -140,12 +147,13 @@ const Projects = () => {
             <button
               key={category.id}
               onClick={() => setFilter(category.id)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-sm ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-sm ${
                 filter === category.id
                   ? `bg-gradient-to-r ${category.color} text-white shadow-lg scale-105 animate-pulse-glow`
                   : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:shadow-md'
               }`}
             >
+              {category.icon}
               {category.label}
             </button>
           ))}
@@ -165,10 +173,13 @@ const Projects = () => {
               <div className={`relative h-48 ${
                 project.featured ? 'lg:h-64' : ''
               } overflow-hidden`}>
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30`}></div>
                 <div className="relative w-full h-full flex items-center justify-center">
                   <div className="text-8xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
                     {project.image}
+                  </div>
+                  <div className="absolute bottom-4 left-4 opacity-30">
+                    {project.icon}
                   </div>
                 </div>
                 
@@ -230,24 +241,55 @@ const Projects = () => {
                   <div className="flex items-center gap-4">
                     <a
                       href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="p-2.5 rounded-full bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
                       aria-label="GitHub"
                     >
                       <Github className="w-5 h-5" />
                     </a>
-                    <a
-                      href={project.live}
-                      className="p-2.5 rounded-full bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
-                      aria-label="Live Demo"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
+                    {project.live !== '#' && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 rounded-full bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                        aria-label="Live Demo"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
 
               {/* Hover overlay effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 dark:from-cyan-500/5 dark:to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* Project Statistics */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { value: '6+', label: 'Projects', description: 'Completed' },
+            { value: '4', label: 'Categories', description: 'Full Stack, AI, IoT' },
+            { value: '200+', label: 'GitHub Stars', description: 'Total' },
+            { value: '4', label: 'Featured', description: 'Highlight Projects' },
+          ].map((stat, index) => (
+            <div
+              key={index}
+              className="text-center p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:border-purple-500 dark:hover:border-cyan-500 transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div className="text-3xl font-bold text-purple-600 dark:text-cyan-400 mb-2">
+                {stat.value}
+              </div>
+              <div className="text-lg font-semibold text-gray-800 dark:text-white">
+                {stat.label}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                {stat.description}
+              </div>
             </div>
           ))}
         </div>
@@ -261,10 +303,10 @@ const Projects = () => {
                 Want to see more?
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-                Check out my GitHub profile for more projects, contributions, and open-source work
+                Check out my GitHub profile for all projects, contributions, and open-source work
               </p>
               <a
-                href="https://github.com"
+                href="https://github.com/Syed-Maaz-Ali-1611"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate-pulse-glow hover:animate-none"

@@ -5,27 +5,27 @@ const About = () => {
   const education = [
     {
       year: '2020 - 2024',
-      degree: 'Bachelor of Technology in Computer Science',
-      institution: 'ABC University',
-      location: 'New York, USA',
-      gpa: '3.8/4.0',
+      degree: 'Bachelor in Software Engineering',
+      institution: 'Sir Syed University of Engineering & Technology',
+      location: 'Karachi, Pakistan',
+      gpa: '',
       achievements: ['Graduated with Honors', 'President of Coding Club']
     },
-    {
-      year: '2018 - 2020',
-      degree: 'Higher Secondary Education',
-      institution: 'XYZ College',
-      location: 'San Francisco, USA',
-      percentage: '95%',
-      achievements: ['Science Olympiad Winner', 'Student Council President']
-    }
+    // {
+    //   year: '2018 - 2020',
+    //   degree: 'Higher Secondary Education',
+    //   institution: 'XYZ College',
+    //   location: 'San Francisco, USA',
+    //   percentage: '95%',
+    //   achievements: ['Science Olympiad Winner', 'Student Council President']
+    // }
   ];
 
   const certifications = [
-    'AWS Certified Solutions Architect',
-    'Google UX Design Professional',
-    'React Developer Certification',
-    'Node.js Backend Development'
+    'IT Bridge Program – MERN Stack Development',
+    'Web Development – Codecademy',
+    'AI and DSA Project Exhibition – SSUET',
+    'Python – Scrimba'
   ];
 
   return (
@@ -84,28 +84,28 @@ const About = () => {
                   <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full border-4 border-white dark:border-gray-900 animate-pulse"></div>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white">[Your Name]</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Full Stack Developer</p>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Syed Maaz Ali</h3>
+                  <p className="text-gray-600 dark:text-gray-400">Software Engineer</p>
                   <div className="flex items-center gap-2 mt-2">
                     <MapPin className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600 dark:text-gray-400">San Francisco, CA</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">Karachi, Pakistan</span>
                   </div>
                 </div>
               </div>
               
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                I specialize in building exceptional digital experiences that are fast, 
-                accessible, visually appealing, and responsive. My passion lies in 
-                creating software that solves real-world problems with elegant solutions.
-              </p>
+           <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+  I specialize in building production-ready applications using modern web technologies. 
+  With experience across e-commerce, management systems, and mobile apps, I focus on 
+  creating scalable, maintainable solutions that deliver real business value.
+</p>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-4 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl hover:scale-105 transition-transform duration-300">
-                  <div className="text-2xl font-bold text-indigo-600 dark:text-cyan-400">3+</div>
+                  <div className="text-2xl font-bold text-indigo-600 dark:text-cyan-400">2+</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Years Exp.</div>
                 </div>
                 <div className="text-center p-4 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl hover:scale-105 transition-transform duration-300">
-                  <div className="text-2xl font-bold text-indigo-600 dark:text-cyan-400">50+</div>
+                  <div className="text-2xl font-bold text-indigo-600 dark:text-cyan-400">20+</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Projects</div>
                 </div>
               </div>
@@ -161,11 +161,11 @@ const About = () => {
                             {edu.year}
                           </span>
                         </div>
-                        <div className="px-3 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-cyan-900 dark:to-blue-900 rounded-full">
+                        {/* <div className="px-3 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-cyan-900 dark:to-blue-900 rounded-full">
                           <span className="text-sm font-semibold text-indigo-700 dark:text-cyan-300">
                             {edu.gpa || edu.percentage}
                           </span>
-                        </div>
+                        </div> */}
                       </div>
                       
                       <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
@@ -208,7 +208,7 @@ const About = () => {
                 Quick Skills Preview
               </h3>
               <div className="space-y-4">
-                {['React/Next.js', 'Node.js/Express', 'UI/UX Design', 'Cloud & DevOps'].map((skill, index) => (
+                {['React/Next.js', 'Node.js/Express', 'UI/UX Design'].map((skill, index) => (
                   <div key={index} className="space-y-2">
                     <div className="flex justify-between text-sm text-gray-700 dark:text-gray-300">
                       <span>{skill}</span>
