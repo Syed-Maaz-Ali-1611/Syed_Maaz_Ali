@@ -5,8 +5,8 @@ import emailjs from '@emailjs/browser';
 const Contact = () => {
   const formRef = useRef();
   const [formData, setFormData] = useState({
-    fname: '',
-    femail: '',
+    name: '',      // ✅ Changed from fname to name
+    email: '',     // ✅ Changed from femail to email
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,110 +24,96 @@ const Contact = () => {
     }
   }, []);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsLoading(true);
-  setSubmitError('');
-  
-  try {
-    console.log('🚀 Attempting to send email...');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSubmitError('');
     
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-    
-    // Get current date
-    const currentDate = new Date().toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-    
-    // CRITICAL: Your template uses {{title}} in Subject, so you MUST include it
-    const templateData = {
-      fname: formData.name || 'No name provided',
-      femail: formData.email || 'No email provided',
-      message: formData.message || 'No message provided',
-      date: currentDate,
-      title: `Message from ${formData.name || 'Visitor'}`, // REQUIRED for template
-      to_email: 'maazall1611@gmail.com' // Ensure correct email
-    };
-    
-    console.log('📤 Sending this data:', templateData);
-    
-    // Method 1: Direct API call (most reliable)
-    const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        service_id: serviceId,
-        template_id: templateId,
-        user_id: publicKey,
-        template_params: templateData
-      })
-    });
-    
-    console.log('📨 Response Status:', response.status);
-    
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('❌ EmailJS Error Response:', errorText);
-      throw new Error(`EmailJS Error ${response.status}: ${errorText}`);
+    try {
+      console.log('🚀 Attempting to send email to USER...');
+      
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      
+      // Get current date
+      const currentDate = new Date().toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      
+      // ✅ CORRECT: Send to USER's email (femail), not to yourself
+      const templateData = {
+        fname: formData.name || 'Guest',      // Template expects {{fname}}
+        femail: formData.email,               // Template expects {{femail}} - goes to user
+        message: formData.message || 'No message',
+        date: currentDate,
+        title: `Message from ${formData.name || 'Visitor'}`
+      };
+      
+      console.log('📤 Sending to USER email:', formData.email);
+      console.log('📤 Data being sent:', templateData);
+      
+      // Method 1: Direct API call
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: templateData
+        })
+      });
+      
+      console.log('📨 Response Status:', response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ EmailJS Error Response:', errorText);
+        throw new Error(`EmailJS Error ${response.status}: ${errorText}`);
+      }
+      
+      const result = await response.text();
+      console.log('✅ Email sent successfully to USER:', result);
+      
+      setIsLoading(false);
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      
+      setTimeout(() => setIsSubmitted(false), 5000);
+      
+    } catch (error) {
+      console.error('❌ Email sending failed:', error);
+      setIsLoading(false);
+      
+      let errorMessage = 'Failed to send confirmation email. ';
+      
+      if (error.message.includes('400')) {
+        errorMessage += 'Template parameter mismatch. ';
+      } else if (error.message.includes('412')) {
+        errorMessage += 'Gmail authentication issue. Reconnect Gmail in EmailJS dashboard. ';
+      }
+      
+      errorMessage += 'You can email me directly at maazall1611@gmail.com';
+      
+      setSubmitError(errorMessage);
+      setTimeout(() => setSubmitError(''), 10000);
     }
-    
-    const result = await response.text();
-    console.log('✅ Email sent successfully:', result);
-    
-    setIsLoading(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-    
-    setTimeout(() => setIsSubmitted(false), 5000);
-    
-  } catch (error) {
-    console.error('❌ Email sending failed:', error);
-    setIsLoading(false);
-    
-    let errorMessage = '';
-    
-    if (error.message.includes('400')) {
-      errorMessage = `
-        🚨 **400 Bad Request - Missing Required Parameter**
-        
-        **Problem:** Your EmailJS template requires a "title" parameter that you're not sending.
-        
-        **Template Has:** Subject: "Contact Us: {{title}}"
-        **Your Code Must Send:** title: "Some value"
-        
-        **Already Fixed in the code above:**
-        ✓ Added "title" parameter with value: "Message from [name]"
-        ✓ All template variables now provided: fname, femail, message, date, title
-        
-        **Still getting error? Try these:**
-        1. Refresh browser and test again
-        2. Check browser Console for detailed logs
-        3. Test with this quick diagnostic below ⬇️
-      `;
-    } else {
-      errorMessage = `Error: ${error.message}`;
-    }
-    
-    setSubmitError(errorMessage);
-    setTimeout(() => setSubmitError(''), 10000);
-  }
-};
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
@@ -306,55 +292,57 @@ const handleSubmit = async (e) => {
                   </div>
                 )}
                 
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-                  <div className="animate-fade-in-up" style={{ animationDelay: '700ms' }}>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Your Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="fname"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300/50 dark:border-gray-600/50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-800 dark:text-white focus:border-indigo-500 dark:focus:border-cyan-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-cyan-900 transition-all placeholder-gray-500/70 dark:placeholder-gray-400/70"
-                      placeholder="John Doe"
-                    />
-                  </div>
+       <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+  {/* Name Input - FIXED */}
+  <div className="animate-fade-in-up" style={{ animationDelay: '700ms' }}>
+    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Your Name *
+    </label>
+    <input
+      type="text"
+      id="name"
+      name="name"  // ✅ Changed from "fname" to "name"
+      value={formData.name}  // ✅ Correct: formData.name
+      onChange={handleChange}
+      required
+      className="w-full px-4 py-3 rounded-xl border border-gray-300/50 dark:border-gray-600/50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-800 dark:text-white focus:border-indigo-500 dark:focus:border-cyan-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-cyan-900 transition-all placeholder-gray-500/70 dark:placeholder-gray-400/70"
+      placeholder="John Doe"
+    />
+  </div>
 
-                  <div className="animate-fade-in-up" style={{ animationDelay: '800ms' }}>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="femail"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300/50 dark:border-gray-600/50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-800 dark:text-white focus:border-indigo-500 dark:focus:border-cyan-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-cyan-900 transition-all placeholder-gray-500/70 dark:placeholder-gray-400/70"
-                      placeholder="john@example.com"
-                    />
-                  </div>
+  {/* Email Input - FIXED */}
+  <div className="animate-fade-in-up" style={{ animationDelay: '800ms' }}>
+    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Email Address *
+    </label>
+    <input
+      type="email"
+      id="email"
+      name="email"  // ✅ Changed from "femail" to "email"
+      value={formData.email}  // ✅ Correct: formData.email
+      onChange={handleChange}
+      required
+      className="w-full px-4 py-3 rounded-xl border border-gray-300/50 dark:border-gray-600/50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-800 dark:text-white focus:border-indigo-500 dark:focus:border-cyan-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-cyan-900 transition-all placeholder-gray-500/70 dark:placeholder-gray-400/70"
+      placeholder="john@example.com"
+    />
+  </div>
 
-                  <div className="animate-fade-in-up" style={{ animationDelay: '900ms' }}>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Your Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows="6"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300/50 dark:border-gray-600/50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-800 dark:text-white focus:border-indigo-500 dark:focus:border-cyan-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-cyan-900 transition-all resize-none placeholder-gray-500/70 dark:placeholder-gray-400/70"
-                      placeholder="Tell me about your project..."
-                    />
-                  </div>
-
+  {/* Message - Already correct */}
+  <div className="animate-fade-in-up" style={{ animationDelay: '900ms' }}>
+    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      Your Message *
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      value={formData.message}
+      onChange={handleChange}
+      required
+      rows="6"
+      className="w-full px-4 py-3 rounded-xl border border-gray-300/50 dark:border-gray-600/50 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-800 dark:text-white focus:border-indigo-500 dark:focus:border-cyan-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-cyan-900 transition-all resize-none placeholder-gray-500/70 dark:placeholder-gray-400/70"
+      placeholder="Tell me about your project..."
+    />
+  </div>
                   {/* Hidden fields for EmailJS template */}
                   <input type="hidden" name="date" />
 
