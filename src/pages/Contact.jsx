@@ -122,26 +122,20 @@ const Contact = () => {
       link: 'mailto:maazall1611@gmail.com',
       color: 'from-blue-500 to-cyan-500'
     },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
-      color: 'from-purple-500 to-pink-500'
-    },
+   
     {
       icon: <MapPin className="w-6 h-6" />,
       title: 'Location',
-      value: 'San Francisco, California',
-      link: 'https://maps.google.com',
+      value: 'Karachi , Pakistan',
+      link: 'https://maps.app.goo.gl/VUZ4i4cJs2bCu3dn9',
       color: 'from-green-500 to-emerald-500'
     }
   ];
 
   const socialLinks = [
-    { icon: <Github className="w-6 h-6" />, label: 'GitHub', url: 'https://github.com', color: 'from-gray-700 to-gray-900' },
-    { icon: <Linkedin className="w-6 h-6" />, label: 'LinkedIn', url: 'https://linkedin.com', color: 'from-blue-600 to-blue-800' },
-    { icon: <Twitter className="w-6 h-6" />, label: 'Twitter', url: 'https://twitter.com', color: 'from-cyan-500 to-blue-500' },
+    { icon: <Github className="w-6 h-6" />, label: 'GitHub', url: 'https://github.com/Syed-Maaz-Ali-1611', color: 'from-gray-700 to-gray-900' },
+    { icon: <Linkedin className="w-6 h-6" />, label: 'LinkedIn', url: 'www.linkedin.com/in/syed-maaz-ali-847a8822b', color: 'from-blue-600 to-blue-800' },
+    // { icon: <Twitter className="w-6 h-6" />, label: 'Twitter', url: 'https://twitter.com', color: 'from-cyan-500 to-blue-500' },
   ];
 
   return (
@@ -374,7 +368,7 @@ const Contact = () => {
                 {/* Privacy Note */}
                 <div className="mt-8 p-4 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl animate-fade-in-up" style={{ animationDelay: '1100ms' }}>
                   <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                    <span className="font-semibold text-indigo-600 dark:text-cyan-400">🔒 Secure</span> - Powered by EmailJS. Your information is protected and will only be used to respond to your inquiry.
+                    <span className="font-semibold text-indigo-600 dark:text-cyan-400">🔒 Secure</span> - Your information is protected and will only be used to respond to your inquiry.
                   </p>
                 </div>
               </>
@@ -388,7 +382,7 @@ const Contact = () => {
             <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-full px-6 py-3">
               <p className="text-gray-700 dark:text-gray-300 font-medium flex items-center justify-center gap-2">
                 <Sparkles className="w-4 h-4 text-yellow-500 animate-spin-slow" />
-                Open for freelance opportunities and full-time positions
+                Open for freelance and other opportunities 
                 <Sparkles className="w-4 h-4 text-yellow-500 animate-spin-slow" />
               </p>
             </div>
