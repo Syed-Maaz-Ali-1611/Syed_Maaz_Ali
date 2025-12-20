@@ -1,5 +1,6 @@
 import React from 'react';
 import { User, GraduationCap, Briefcase, Award, MapPin, Calendar } from 'lucide-react';
+import profileImg from "../assets/profile.PNG";
 
 const About = () => {
   const education = [
@@ -77,9 +78,14 @@ const About = () => {
               <div className="flex items-center gap-6 mb-8">
                 <div className="relative">
                   <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 p-1 animate-gradient">
-                    <div className="w-full h-full rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm flex items-center justify-center">
-                      <User className="w-12 h-12 text-indigo-600 dark:text-cyan-400" />
-                    </div>
+                   <div className="w-full h-full rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm overflow-hidden">
+  <img
+    src={profileImg}
+    alt="Profile"
+    className="w-full h-full object-cover rounded-full"
+  />
+</div>
+
                   </div>
                   <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full border-4 border-white dark:border-gray-900 animate-pulse"></div>
                 </div>

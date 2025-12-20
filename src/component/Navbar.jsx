@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X } from 'lucide-react';
-import { useTheme } from './ThemeContext';
+import React, { useState, useEffect } from "react";
+import { Sun, Moon, Menu, X } from "lucide-react";
+import { useTheme } from "./ThemeContext";
+import profileImg from "../assets/profile.PNG";
 
 const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -8,37 +9,37 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
 
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Show/hide navbar on scroll
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      
+
       // Add scrolled class for background change
       if (currentScrollY > 10) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
-      
+
       setLastScrollY(currentScrollY);
-      
+
       // Update active section based on scroll position
       updateActiveSection();
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
 
@@ -50,13 +51,20 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Function to update active section based on scroll position
   const updateActiveSection = () => {
-    const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+    const sections = [
+      "home",
+      "about",
+      "skills",
+      "experience",
+      "projects",
+      "contact",
+    ];
     const scrollPosition = window.scrollY + 100;
 
     for (const section of sections) {
@@ -64,7 +72,7 @@ const Navbar = () => {
       if (element) {
         const offsetTop = element.offsetTop;
         const offsetBottom = offsetTop + element.offsetHeight;
-        
+
         if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
           setActiveSection(section);
           break;
@@ -79,42 +87,46 @@ const Navbar = () => {
     if (element) {
       window.scrollTo({
         top: element.offsetTop,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
       setIsMobileMenuOpen(false);
     }
   };
 
   const navItems = [
-    { label: 'Home', id: 'home' },
-    { label: 'About', id: 'about' },
-    { label: 'Skills', id: 'skills' },
-    { label: 'Experience', id: 'experience' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Contact', id: 'contact' },
+    { label: "Home", id: "home" },
+    { label: "About", id: "about" },
+    { label: "Skills", id: "skills" },
+    { label: "Experience", id: "experience" },
+    { label: "Projects", id: "projects" },
+    { label: "Contact", id: "contact" },
   ];
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
+          isVisible ? "translate-y-0" : "-translate-y-full"
         } ${
-          isScrolled 
-            ? 'backdrop-blur-lg bg-white/70 dark:bg-gray-900/70 shadow-lg dark:shadow-gray-900/30 border-b border-gray-200 dark:border-gray-800' 
-            : 'bg-transparent'
+          isScrolled
+            ? "backdrop-blur-lg bg-white/70 dark:bg-gray-900/70 shadow-lg dark:shadow-gray-900/30 border-b border-gray-200 dark:border-gray-800"
+            : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo - Left */}
             <div className="flex-shrink-0">
-              <button 
-                onClick={() => scrollToSection('home')}
+              <button
+                onClick={() => scrollToSection("home")}
                 className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
               >
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">P</span>
+                  <img
+                    src={profileImg}
+                    alt="Profile"
+                    className="w-full h-full object-cover rounded-full"
+                  />{" "}
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">
                   Syed Maaz Ali
@@ -131,8 +143,8 @@ const Navbar = () => {
                     onClick={() => scrollToSection(item.id)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-white dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-cyan-400 ${
                       activeSection === item.id
-                        ? 'bg-white dark:bg-gray-700 text-indigo-600 dark:text-cyan-400'
-                        : 'text-gray-700 dark:text-gray-300'
+                        ? "bg-white dark:bg-gray-700 text-indigo-600 dark:text-cyan-400"
+                        : "text-gray-700 dark:text-gray-300"
                     }`}
                   >
                     {item.label}
@@ -176,8 +188,8 @@ const Navbar = () => {
         <div
           className={`md:hidden transition-all duration-300 ease-in-out ${
             isMobileMenuOpen
-              ? 'max-h-96 opacity-100'
-              : 'max-h-0 opacity-0 overflow-hidden'
+              ? "max-h-96 opacity-100"
+              : "max-h-0 opacity-0 overflow-hidden"
           }`}
         >
           <div className="px-4 pt-2 pb-4 space-y-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-800">
@@ -187,8 +199,8 @@ const Navbar = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`block w-full text-left px-4 py-3 rounded-lg text-base font-medium hover:bg-indigo-50 dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-cyan-400 transition-colors duration-200 ${
                   activeSection === item.id
-                    ? 'bg-indigo-50 dark:bg-gray-800 text-indigo-600 dark:text-cyan-400'
-                    : 'text-gray-700 dark:text-gray-300'
+                    ? "bg-indigo-50 dark:bg-gray-800 text-indigo-600 dark:text-cyan-400"
+                    : "text-gray-700 dark:text-gray-300"
                 }`}
               >
                 {item.label}
